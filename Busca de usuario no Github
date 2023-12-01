@@ -1,0 +1,26 @@
+import requests
+
+def obter_informacoes_usuario(username):
+    # URL da API do GitHub para obter informações de um usuário
+    url = f'https://api.github.com/users/{username}'
+
+    # Fazendo a solicitação HTTP GET
+    response = requests.get(url)
+
+    # Verificando se a solicitação foi bem-sucedida (código de status 200)
+    if response.status_code == 200:
+        # Convertendo a resposta para formato JSON
+        usuario_info = response.json()
+
+        # Exibindo algumas informações sobre o usuário
+        print(f"Nome do usuário: {usuario_info['name']}")
+        print(f"Bio: {usuario_info['bio']}")
+        print(f"Número de repositórios públicos: {usuario_info['public_repos']}")
+    else:
+        print(f"Falha na solicitação. Código de status: {response.status_code}")
+
+# Solicitando o nome de usuário ao usuário
+usuario_github = input("Digite o nome de usuário do GitHub: ")
+
+# Obtendo e exibindo informações sobre o usuário
+obter_informacoes_usuario(usuario_github)
